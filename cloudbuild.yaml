@@ -3,4 +3,4 @@ steps:
   args: ['clone', '--depth=1', 'https://github.com/devopsgcp/gcp-cicd-microservice.git']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/${PROJECT_ID}/adservice:v1', '-f', '/adservice/Dockerfile', '.']
+  args: ['build', '-t', 'gcr.io/${PROJECT_ID}/adservice:v1', '-f', '/src/adservice/Dockerfile', '.']
