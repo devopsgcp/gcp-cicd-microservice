@@ -9,9 +9,9 @@ steps:
   args:
     - build
     - '-t'
-    - 'adservice:v1'
+    - 'cartservice:v1'
     - '-f'
-    - 'src/adservice/Dockerfile'
+    - 'src/cartservice/src/Dockerfile'
     - '.'
 
 
