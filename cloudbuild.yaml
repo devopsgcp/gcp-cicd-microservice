@@ -11,5 +11,5 @@ steps:
     - '-t'
     - 'gcr.io/${PROJECT_ID}/adservice:v1'
     - '-f'
-    - '/src/adservice/Dockerfile'
+    - 'src/adservice/Dockerfile'  # Correct relative path here
     - '.'
