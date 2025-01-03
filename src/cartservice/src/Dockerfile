@@ -18,7 +18,7 @@ WORKDIR /app
 COPY src/cartservice/src/cartservice.csproj .
 RUN dotnet restore cartservice.csproj \
     -r linux-x64
-COPY src/protos /app
+COPY cartservice/src/protos /app
 #COPY . .
 RUN dotnet publish cartservice.csproj \
     -p:PublishSingleFile=true \
