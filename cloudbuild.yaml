@@ -7,18 +7,9 @@ steps:
     - 'https://github.com/devopsgcp/gcp-cicd-microservice.git'
 
 # Step 2: Build Docler image adservice
-#- name: 'gcr.io/cloud-builders/docker'
-#  args: ['build', '-f', 'src/adservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v1', '.']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-f', 'src/currencyservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/currencyservice:v1', '.']
 
 # Step 3: Push the Docker image to Artifact Registry
-#- name: 'gcr.io/cloud-builders/docker'
- # args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v1']
-
-# Step 4: Build Docler image cartservice
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-f', 'src/checkoutservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice:v1', '.']
-
-# Step 5: Push the Docker image to Artifact Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice:v1']
-
+  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/currencyservice:v1']
