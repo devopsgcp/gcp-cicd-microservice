@@ -16,9 +16,9 @@ FROM golang:1.23.2-alpine@sha256:9dd2625a1ff2859b8d8b01d8f7822c0f528942fe56cfe7a
 WORKDIR /src
 
 # restore dependencies
-COPY src/checkoutservice/go.mod src/checkoutservice/go.sum ./
+COPY src/frontend/go.mod src/frontend/go.sum ./
 RUN go mod download
-COPY src/checkoutservice/ . 
+COPY src/frontend/ . 
 
 # Skaffold passes in debug-oriented compiler flags
 ARG SKAFFOLD_GO_GCFLAGS
@@ -27,7 +27,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -gcflags="${SKAFFOLD_GO_GCFLAGS}" -o /go/b
 FROM scratch
 WORKDIR /src
 COPY --from=builder /go/bin/frontend /src/server
-COPY ./templates ./templates
+COPY src/frontend/templates ./templates
 COPY ./static ./static
 
 # Definition of this variable is used by 'skaffold debug' to identify a golang binary.
