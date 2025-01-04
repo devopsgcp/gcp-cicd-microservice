@@ -29,7 +29,7 @@ FROM scratch
 WORKDIR /src
 COPY --from=builder /productcatalogservice ./server
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
-COPY products.json .
+COPY src/productcatalogservice/products.json .
 
 # Definition of this variable is used by 'skaffold debug' to identify a golang binary.
 # Default behavior - a failure prints a stack trace for the current goroutine.
