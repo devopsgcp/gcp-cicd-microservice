@@ -1,42 +1,41 @@
-# Step 1: Build Stage (SDK image)
-FROM mcr.microsoft.com/dotnet/sdk:9.0.100-noble@sha256:bd0365368f46274500ebb086f491703052b8ce23e3d52d3233a23b2020730057 AS builder
+# Copyright 2021 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
+# https://mcr.microsoft.com/product/dotnet/sdk
+FROM mcr.microsoft.com/dotnet/sdk:8.0.204@sha256:7861b15f318949cf9214d9ad5382b680a0e22e3b8673180707aa0c594ab75656 as builder
 WORKDIR /app
-
-# Copy the .csproj file and restore dependencies (via dotnet restore)
-COPY src/cartservice/cartservice.csproj ./  # Ensure the path is correct based on your build context
-RUN dotnet restore cartservice.csproj -r linux-x64
-
-# Copy all source files to the container
-COPY src/cartservice/ .  # Copy the entire src/cartservice directory, adjust according to your project structure
-
-# Publish the application
+COPY cartservice.csproj .
+RUN dotnet restore cartservice.csproj \
+    -r linux-musl-x64
+COPY . .
 RUN dotnet publish cartservice.csproj \
     -p:PublishSingleFile=true \
-    -r linux-x64 \
+    -r linux-musl-x64 \
     --self-contained true \
-    -p:PublishTrimmed=true \
-    -p:TrimMode=full \
+    -p:PublishTrimmed=True \
+    -p:TrimMode=Full \
     -c release \
-    -o /cartservice
+    -o /cartservice \
+    --no-restore
 
-# Step 2: Runtime Stage (Runtime image)
-FROM mcr.microsoft.com/dotnet/runtime-deps:9.0.0-noble-chiseled@sha256:5cc893809e2d2869e1a98c1eecc4c6ff6978d53bc3e5342014eff28a058867a4
+# https://mcr.microsoft.com/product/dotnet/runtime-deps
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.4-alpine3.18-amd64@sha256:1fd5e6015ca8b6778a19339a921363370c2ab5cf91dc3421df5f29f4caa07440
 
 WORKDIR /app
-
-# Copy the published files from the builder image to the runtime image
 COPY --from=builder /cartservice .
-
-# Expose the application port
 EXPOSE 7070
-
-# Set environment variables
 ENV DOTNET_EnableDiagnostics=0 \
     ASPNETCORE_HTTP_PORTS=7070
-
-# Run as a non-root user
 USER 1000
-
-# Set the entrypoint for the application
 ENTRYPOINT ["/app/cartservice"]
