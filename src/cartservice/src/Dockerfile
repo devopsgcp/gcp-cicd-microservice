@@ -18,15 +18,16 @@ WORKDIR /app
 COPY src/cartservice/src/cartservice.csproj .
 RUN dotnet restore cartservice.csproj \
     -r linux-musl-x64
-COPY . ./app
-RUN dotnet publish src/cartservice/src/cartservice.csproj \
+#COPY . ./app
+COPY src/cartservice/src/cartservice.csproj /app/src/cartservice/src/cartservice.csproj
+RUN dotnet publish /app/src/cartservice/src/cartservice.csproj \
     -p:PublishSingleFile=true \
     -r linux-musl-x64 \
     --self-contained true \
     -p:PublishTrimmed=True \
     -p:TrimMode=Full \
     -c release \
-    -o src/cartservice/src/cartservice
+    -o /cartservice
 
 
 # https://mcr.microsoft.com/product/dotnet/runtime-deps
