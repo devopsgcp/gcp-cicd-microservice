@@ -6,6 +6,6 @@ steps:
     - 'https://github.com/devopsgcp/gcp-cicd-microservice.git'
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v1','-f','/adservice' , '.']
+  args: ['build', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v1','-f','adservice/' , '.']
 
     
