@@ -16,7 +16,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0.204@sha256:7861b15f318949cf9214d9ad5382b680a0e22e3b8673180707aa0c594ab75656 as builder
 WORKDIR /app
 COPY src/cartservice/src/cartservice.csproj .
-RUN dotnet restore cartservice.csproj \
+RUN dotnet restore src/cartservice/src/cartservice.csproj \
     -r linux-musl-x64
 COPY . ./app
 RUN dotnet publish src/cartservice/src/cartservice.csproj \
