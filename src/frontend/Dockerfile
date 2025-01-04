@@ -16,9 +16,9 @@ FROM golang:1.23.2-alpine@sha256:9dd2625a1ff2859b8d8b01d8f7822c0f528942fe56cfe7a
 WORKDIR /src
 
 # restore dependencies
-COPY go.mod go.sum ./
+COPY src/checkoutservice/go.mod src/checkoutservice/go.sum ./
 RUN go mod download
-COPY . .
+COPY src/checkoutservice/ . 
 
 # Skaffold passes in debug-oriented compiler flags
 ARG SKAFFOLD_GO_GCFLAGS

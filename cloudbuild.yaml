@@ -8,8 +8,8 @@ steps:
 
 # Step 2: Build Docler image adservice
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-f', 'src/emailservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/emailservice:v1', '.']
+  args: ['build', '-f', 'src/frontend/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend:v1', '.']
 
 # Step 3: Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/emailservice:v1']
+  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend:v1']
