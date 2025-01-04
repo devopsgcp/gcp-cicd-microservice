@@ -23,7 +23,7 @@ RUN apk update \
     && rm -rf /var/cache/apk/*
 
 # get packages
-COPY requirements.txt .
+COPY src/recommendationservice/requirements.txt .
 RUN pip install -r requirements.txt
 
 FROM base

@@ -22,7 +22,7 @@ RUN apt-get -qq update \
     && rm -rf /var/lib/apt/lists/*
 
 # get packages
-COPY requirements.txt .
+COPY src/shoppingassistantservice/requirements.txt .
 RUN pip install -r requirements.txt
 
 FROM base
