@@ -16,7 +16,8 @@ FROM golang:1.23.2-alpine@sha256:9dd2625a1ff2859b8d8b01d8f7822c0f528942fe56cfe7a
 WORKDIR /src
 
 # restore dependencies
-COPY src/checkoutservice/go.mod go.sum ./
+COPY src/checkoutservice/go.mod  ./
+COPY src/checkoutservice/go.sum ./
 RUN go mod download
 
 COPY . .
