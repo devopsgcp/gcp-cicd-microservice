@@ -27,7 +27,7 @@ RUN dotnet publish src/cartservice/src/cartservice.csproj \
     -p:TrimMode=Full \
     -c release \
     -o /cartservice \
-    --no-restore
+   # --no-restore
 
 # https://mcr.microsoft.com/product/dotnet/runtime-deps
 FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.4-alpine3.18-amd64@sha256:1fd5e6015ca8b6778a19339a921363370c2ab5cf91dc3421df5f29f4caa07440
