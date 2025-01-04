@@ -19,7 +19,7 @@ COPY src/cartservice/src/cartservice.csproj .
 RUN dotnet restore cartservice.csproj \
     -r linux-musl-x64
 COPY . .
-RUN dotnet publish cartservice.csproj \
+RUN dotnet publish src/cartservice/src/cartservice.csproj \
     -p:PublishSingleFile=true \
     -r linux-musl-x64 \
     --self-contained true \
