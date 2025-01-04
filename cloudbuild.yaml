@@ -11,7 +11,7 @@ steps:
     - '-t'
     - 'adservice:v1'
     - '-f'
-    - 'adservice/Dockerfile'
+    - 'src/adservice/Dockerfile'
     - '.'
 
 
