@@ -8,8 +8,24 @@ steps:
 
 # Step 2: Build Docler image adservice
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-f', 'src/frontend/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend:v1', '.']
+  args: ['build', '-f', 'src/loadgenerator/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/loadgenerator:v1', '.']
 
 # Step 3: Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend:v1']
+  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/loadgenerator:v1']
+
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-f', 'src/paymentservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/paymentservice:v1', '.']
+
+# Step 3: Push the Docker image to Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/paymentservice:v1']
+
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-f', 'src/productcatalogservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice:v1', '.']
+
+# Step 3: Push the Docker image to Artifact Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice:v1']

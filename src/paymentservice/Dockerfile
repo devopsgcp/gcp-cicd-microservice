@@ -23,7 +23,7 @@ RUN apk add --update --no-cache \
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY src/paymentservice/package*.json ./
 
 RUN npm install --only=production
 
