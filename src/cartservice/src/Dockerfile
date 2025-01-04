@@ -15,11 +15,11 @@
 # https://mcr.microsoft.com/product/dotnet/sdk
 FROM mcr.microsoft.com/dotnet/sdk:8.0.204@sha256:7861b15f318949cf9214d9ad5382b680a0e22e3b8673180707aa0c594ab75656 as builder
 WORKDIR /app
-COPY src/cartservice/src/cartservice.csproj .
+COPY src/cartservice/src/cartservice.csproj /app/src/cartservice/src/cartservice.csproj
 RUN dotnet restore cartservice.csproj \
     -r linux-musl-x64
-#COPY . ./app
-COPY src/cartservice/src/cartservice.csproj /app/src/cartservice/src/cartservice.csproj
+COPY . ./app
+
 RUN dotnet publish /app/src/cartservice/src/cartservice.csproj \
     -p:PublishSingleFile=true \
     -r linux-musl-x64 \
