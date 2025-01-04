@@ -16,9 +16,9 @@ steps:
 
 # Step 4: Build Docler image cartservice
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-f', 'src/cartservice/src/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v1', '.']
+  args: ['build', '-f', 'src/checkoutservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice:v1', '.']
 
 # Step 5: Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v1']
+  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice:v1']
 
