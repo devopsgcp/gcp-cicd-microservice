@@ -1,91 +1,235 @@
 steps:
-#Step 1: cloning source code from github
+#Step 0: cloning source code from github
 - name: 'gcr.io/cloud-builders/git'
   args:
     - clone
     - '--depth=1'
     - 'https://github.com/devopsgcp/gcp-cicd-microservice.git'
 
-
-# Step 2: Build Docker image adservice
+# Step 1: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'Check existing image adservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
+        echo "Image already exists. Skipping build."
+        exit 0
+      fi
+# Build Docker image adservice
 - name: 'gcr.io/cloud-builders/docker'
+  id: 'Build image'
   args: ['build', '-f', 'src/adservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v1', '.']
 
-# Step 3: Push the Docker image to Artifact Registry
+#  Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
+  id: 'push image'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v1']
 
-# Step 4: Build Docker image checkoutservice
+# Step 2: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'ckeck existing image checkoutservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
+        echo "Image already exists. Skipping build."
+        exit 0
+      fi
+
+
+# Build Docker image checkoutservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/checkoutservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice:v1', '.']
 
-# Step 5: Push the Docker image to Artifact Registry
+#  Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice:v1']
   
- 
-# Step 6: Build Docler image currencyservice
+
+# Step 3: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'currencyservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/currencyservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        echo "Images already exists.. skipping build."
+        exit 0
+      f1
+
+
+# Build Docler image currencyservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/currencyservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/currencyservice:v1', '.']
 
-# Step 7: Push the Docker image to Artifact Registry
+# Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/currencyservice:v1']
 
-# Step 8: Build Docker image frontend
+
+# Step 4: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'frontend'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend \
+        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        echo "Images already exists.. skipping build."
+        exit 0
+      f1 
+
+
+#Build Docker image frontend
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/frontend/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend:v1', '.']
 
-# Step 9: Push the Docker image to Artifact Registry
+# Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend:v1']
 
-# Step 10: Build Docker image loadgenerator
+
+# Step 5: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'loadgenerator'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/loadgenerator \
+        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        echo "Images already exists.. skipping build."
+        exit 0
+      f1 
+
+# Build Docker image loadgenerator
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/loadgenerator/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/loadgenerator:v1', '.']
   
-# Step 11: Push the Docker image to Artifact Registry
+# Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/loadgenerator:v1']
 
-# Step 12: Build Docker images paymentservice
+
+# Step 6: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'paymentservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/paymentservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        echo "Images already exists.. skipping build."
+        exit 0
+      f1 
+
+# Build Docker images paymentservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/paymentservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/paymentservice:v1', '.']
 
-# Step 13: Push the Docker image to Artifact Registry
+# Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/paymentservice:v1']
 
-# step 14: Build Docker image productcatalogservice
+
+# Step 7: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'productcatalogservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        echo "Images already exists.. skipping build."
+        exit 0
+      f1 
+# Build Docker image productcatalogservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/productcatalogservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice:v1', '.']
 
-# Step 15: Push the Docker image to Artifact Registry
+# Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice:v1']
   
-
-# Step 16: Build Docker images recommendationservice
+# Step 8: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'recommendationservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/recommendationservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        echo "Images already exists.. skipping build."
+        exit 0
+      f1 
+# Build Docker images recommendationservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build','-f', 'src/recommendationservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/recommendationservice:v1', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push','us-central1-docker.pkg.dev/cicd-2024/ecommerce/recommendationservice:v1']
 
-  
-# Step 17: Build Docler image shippingservice
+
+# Step 9: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'shippingservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/shippingservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        echo "Images already exists.. skipping build."
+        exit 0
+      f1 
+
+
+#  Build Docler image shippingservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/shippingservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/shippingservice:v1', '.']
 
-# Step 18: Push the Docker image to Artifact Registry
+# Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/shippingservice:v1']
 
-# Step 19: Build Docler image shoppingassistantservice
+# Step 10: Check if the image already exists in Artifact Registry
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'shoppingassistantservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+      us-central1-docker.pkg.dev/cicd-2024/ecommerce/shoppingassistantservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        echo "Images already exists.. skipping build."
+        exit 0
+      f1 
+
+# Build Docler image shoppingassistantservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/shoppingassistantservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/shoppingassistantservice:v1', '.']
 
-# Step 20: Push the Docker image to Artifact Registry
+# Push the Docker image to Artifact Registry
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/shoppingassistantservice:v1']
-
