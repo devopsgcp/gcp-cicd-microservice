@@ -37,7 +37,7 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Image already exists. Skipping build."
         exit 0
@@ -61,11 +61,11 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/currencyservice \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/currencyservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"''; then
-        echo "Images already exists.. skipping build."
+        echo "Images already exists. skipping build."
         exit 0
-      f1
+      fi
 
 
 # Build Docler image currencyservice
@@ -85,11 +85,11 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend \
         --filter="tags:v1" --format="json" | grep -q '"v1"''; then
         echo "Images already exists.. skipping build."
         exit 0
-      f1 
+      fi
 
 
 #Build Docker image frontend
@@ -109,11 +109,11 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/loadgenerator \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/loadgenerator \
         --filter="tags:v1" --format="json" | grep -q '"v1"''; then
         echo "Images already exists.. skipping build."
         exit 0
-      f1 
+      fi
 
 # Build Docker image loadgenerator
 - name: 'gcr.io/cloud-builders/docker'
@@ -132,11 +132,11 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/paymentservice \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/paymentservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"''; then
         echo "Images already exists.. skipping build."
         exit 0
-      f1 
+      fi 
 
 # Build Docker images paymentservice
 - name: 'gcr.io/cloud-builders/docker'
@@ -155,11 +155,11 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"''; then
         echo "Images already exists.. skipping build."
         exit 0
-      f1 
+      fi 
 # Build Docker image productcatalogservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build', '-f', 'src/productcatalogservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice:v1', '.']
@@ -176,11 +176,11 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/recommendationservice \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/recommendationservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"''; then
         echo "Images already exists.. skipping build."
         exit 0
-      f1 
+      fi 
 # Build Docker images recommendationservice
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build','-f', 'src/recommendationservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/recommendationservice:v1', '.']
@@ -197,11 +197,11 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/shippingservice \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/shippingservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"''; then
         echo "Images already exists.. skipping build."
         exit 0
-      f1 
+      fi 
 
 
 #  Build Docler image shippingservice
@@ -220,11 +220,11 @@ steps:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-      us-central1-docker.pkg.dev/cicd-2024/ecommerce/shoppingassistantservice \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/shoppingassistantservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"''; then
         echo "Images already exists.. skipping build."
         exit 0
-      f1 
+      fi
 
 # Build Docler image shoppingassistantservice
 - name: 'gcr.io/cloud-builders/docker'
