@@ -8,7 +8,7 @@ steps:
 
 # Step 1: Check if the image already exists in Artifact Registry
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: 'Check existing image adservice'
+  id: 'adservice'
   entrypoint: 'bash'
   args:
     - '-c'
@@ -16,12 +16,12 @@ steps:
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"'; then
-        echo "Image already exists. Skipping build."
+        echo "Image exists" > /workspace/skip_adservice
         exit 0
       fi
 # Build Docker image adservice
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'Build image'
+  id: 'Build image adservice'
   args: ['build', '-f', 'src/adservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v1', '.']
 
 #  Push the Docker image to Artifact Registry
@@ -62,7 +62,7 @@ steps:
     - |
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/currencyservice \
-        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Images already exists. skipping build."
         exit 0
       fi
@@ -86,7 +86,7 @@ steps:
     - |
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend \
-        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Images already exists.. skipping build."
         exit 0
       fi
@@ -110,7 +110,7 @@ steps:
     - |
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/loadgenerator \
-        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Images already exists.. skipping build."
         exit 0
       fi
@@ -133,7 +133,7 @@ steps:
     - |
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/paymentservice \
-        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Images already exists.. skipping build."
         exit 0
       fi 
@@ -156,7 +156,7 @@ steps:
     - |
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/productcatalogservice \
-        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Images already exists.. skipping build."
         exit 0
       fi 
@@ -177,7 +177,7 @@ steps:
     - |
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/recommendationservice \
-        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Images already exists.. skipping build."
         exit 0
       fi 
@@ -198,7 +198,7 @@ steps:
     - |
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/shippingservice \
-        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Images already exists.. skipping build."
         exit 0
       fi 
@@ -221,7 +221,7 @@ steps:
     - |
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/shoppingassistantservice \
-        --filter="tags:v1" --format="json" | grep -q '"v1"''; then
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Images already exists.. skipping build."
         exit 0
       fi
