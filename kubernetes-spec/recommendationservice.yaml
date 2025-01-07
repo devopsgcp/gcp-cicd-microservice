@@ -18,14 +18,6 @@ spec:
         image: us-central1-docker.pkg.dev/cicd-2024/ecommerce/recommendationservice:v1
         ports:
         - containerPort: 8080
-        readinessProbe:
-          periodSeconds: 5
-          grpc:
-            port: 8080
-        livenessProbe:
-          periodSeconds: 5
-          grpc:
-            port: 8080
         env:
         - name: PORT
           value: "8080"

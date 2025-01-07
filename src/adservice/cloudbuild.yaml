@@ -1,0 +1,25 @@
+# Step 1: Check if the image already exists in Artifact Registry for adservice and if not present the images
+# Build it and push it on artifact registry  
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'adservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+        us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/adservice \
+        --filter="tags:v1" --format="get(digest)" | grep -q '"v1"'; then
+        echo "Image exists" > /workspace/skip_adservice
+        exit 0
+      fi
+
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'Build image adservice'
+  args: ['build', '-f', 'src/adservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/adservice:v1', '.']
+
+
+- name: 'gcr.io/cloud-builders/docker'
+  id: 'push image'
+  args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/adservice:v1']

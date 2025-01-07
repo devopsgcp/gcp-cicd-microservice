@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: server
-          image: frontend
+          image: us-central1-docker.pkg.dev/cicd-2024/ecommerce/frontend:v1
           ports:
           - containerPort: 8080
           readinessProbe:
