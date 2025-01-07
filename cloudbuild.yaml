@@ -12,3 +12,10 @@ steps:
     - '-c'
     - |
       gcloud builds submit --config=src/adservice/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/checkoutservice/cloudbuild.yaml

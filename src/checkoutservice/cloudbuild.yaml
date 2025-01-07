@@ -1,0 +1,19 @@
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'ckeck existing image checkoutservice'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      if gcloud artifacts docker images list \
+        us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice \
+        --filter="tags:v1" --format="json" | grep -q '"v1"'; then
+        echo "Image already exists. Skipping build."
+        exit 0
+      fi
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-f', 'src/checkoutservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice:v1', '.']
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/checkoutservice:v1']
