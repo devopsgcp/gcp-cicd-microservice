@@ -2,7 +2,7 @@ FROM eclipse-temurin:21@sha256:fe90fc98e067d7708811aec14fa60a4b81127d3dc7387aecc
 
 WORKDIR /app
 
-COPY ["./build.gradle", "./gradlew", "./"]
+COPY ["adservice/build.gradle", "adservice/gradlew", "./"]
 COPY gradle gradle
 RUN chmod +x gradlew
 RUN ./gradlew downloadRepos
