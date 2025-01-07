@@ -19,3 +19,67 @@ steps:
     - '-c'
     - |
       gcloud builds submit --config=src/checkoutservice/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/currencyservice/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/emailservice/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/frontend/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/loadgenerator/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/paymentservice/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/productcatalogservice/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/recommendationservice/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/shippingservice/cloudbuild.yaml
+
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: 'bash'
+  args:
+    - '-c'
+    - |
+      gcloud builds submit --config=src/shoppingassistantservice/cloudbuild.yaml
+

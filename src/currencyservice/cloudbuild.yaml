@@ -1,19 +1,19 @@
 steps:
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: 'checkoutservice'
+  id: 'currencyservice'
   entrypoint: 'bash'
   args:
     - '-c'
     - |
       if gcloud artifacts docker images list \
-        us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/checkoutservice \
+        us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/currencyservice \
         --filter="tags:v1" --format="json" | grep -q '"v1"'; then
         echo "Image already exists. Skipping build."
         exit 0
       fi
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-f', 'src/checkoutservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/checkoutservice:v1', '.']
+  args: ['build', '-f', 'src/currencyservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/currencyservice:v1', '.']
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/checkoutservice:v1']
+  args: ['push', 'us-central1-docker.pkg.dev/$PROJECT_ID/ecommerce/currencyservice:v1']
