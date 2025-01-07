@@ -100,10 +100,12 @@ metadata:
   labels:
     app: frontend
 spec:
-  type: LoadBalancer
+  type: NodePort  # Changed to NodePort
   selector:
     app: frontend
   ports:
-  - name: http
-    port: 80
-    targetPort: 8080
+    - name: http
+      port: 80          # The port that the service exposes internally
+      targetPort: 8080  # The port on the pod to forward traffic to
+      nodePort: 30080   # Optional: The external port on each node (automatically assigned if not specified)
+

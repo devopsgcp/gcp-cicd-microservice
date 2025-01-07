@@ -83,3 +83,27 @@ steps:
     - |
       gcloud builds submit --config=src/shoppingassistantservice/cloudbuild.yaml
 
+# Deploy on Gke cluster
+
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: 'configure-kubectl'
+  args:
+    - 'container'
+    - 'clusters'
+    - 'get-credentials'
+    - 'ecommerece'
+    - '--region'
+    - 'us-central1'
+    - '--project'
+    - 'cicd-2024'
+
+  # Step 3: Deploy the pod to the GKE cluster
+- name: 'gcr.io/cloud-builders/kubectl'
+  id: 'deploy-pod'
+  args:
+    - 'apply'
+    - '-f'
+    - 'kubernetes-spec'
+
+
+# gcloud container clusters get-credentials ecommerece --region us-central1 --project cicd-2024

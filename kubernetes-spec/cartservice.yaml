@@ -17,7 +17,7 @@ spec:
     spec:
      containers:
        - name: cartservice
-         image:  us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v1
+         image: us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v1
          ports:
          - containerPort: 7070
          env:
