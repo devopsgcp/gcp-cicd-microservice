@@ -11,4 +11,4 @@ steps:
   args:
     - '-c'
     - |
-      gcloud builds submit --config=adservice/cloudbuild.yaml
+      gcloud builds submit --config=src/adservice/cloudbuild.yaml
