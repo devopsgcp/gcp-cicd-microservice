@@ -4,7 +4,7 @@ ARG TARGETARCH
 WORKDIR /src
 
 # restore dependencies
-COPY src/checkoutservice/go.mod go.sum ./
+COPY src/checkoutservice/go.mod src/checkoutservice/go.sum ./
 RUN go mod download
 
 COPY . .
