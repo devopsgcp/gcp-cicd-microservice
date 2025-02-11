@@ -8,7 +8,7 @@ steps:
 
 # Build it and push it on artifact registry  
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: 'adservice'
+  id: 'ckeck existing image adservice'
   entrypoint: 'bash'
   args:
     - '-c'
@@ -22,17 +22,15 @@ steps:
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'adservice'
   args: ['build', '-f', 'src/adservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v2', '.']
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'adservice'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v2']
 
 # Build it and push it on cartservice registry  
 - name: 'gcr.io/cloud-builders/gcloud'
-  id: 'cartservice'
+  id: 'ckeck existing image cartservice'
   entrypoint: 'bash'
   args:
     - '-c'
@@ -40,18 +38,16 @@ steps:
       if gcloud artifacts docker images list \
         us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice \
         --filter="tags:v2" --format="get(digest)" | grep -q '"v2"'; then
-        echo "Image exists" > /workspace/skip_adservice
+        echo "Image exists" > /workspace/skip_cartservice
         exit 0
       fi
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'cartservice'
   args: ['build', '-f', 'src/cartservice/src/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v2', '.']
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'cartservice'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v2']
 
 # Step 2: Check if the image already exists in Artifact Registry
