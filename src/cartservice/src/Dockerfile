@@ -3,7 +3,7 @@ FROM --platform=linux/amd64 mcr.microsoft.com/dotnet/sdk:9.0.101-noble AS builde
 WORKDIR /app
 
 # Copy only the project file and restore dependencies
-COPY cartservice/src/cartservice.csproj .
+COPY src/cartservice/src/cartservice.csproj .
 RUN dotnet restore cartservice.csproj
 
 # Copy the rest of the source code
