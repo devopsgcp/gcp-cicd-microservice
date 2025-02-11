@@ -8,17 +8,17 @@ blinker==1.9.0
     # via flask
 brotli==1.1.0
     # via geventhttpclient
-certifi==2024.12.14
+certifi==2025.1.31
     # via
     #   geventhttpclient
     #   requests
-charset-normalizer==3.4.0
+charset-normalizer==3.4.1
     # via requests
-click==8.1.7
+click==8.1.8
     # via flask
 configargparse==1.7
     # via locust
-faker==33.1.0
+faker==35.2.0
     # via -r requirements.in
 flask==3.1.0
     # via
@@ -41,9 +41,9 @@ idna==3.10
     # via requests
 itsdangerous==2.2.0
     # via flask
-jinja2==3.1.4
+jinja2==3.1.5
     # via flask
-locust==2.32.4
+locust==2.32.8
     # via -r requirements.in
 markupsafe==3.0.2
     # via
@@ -51,11 +51,11 @@ markupsafe==3.0.2
     #   werkzeug
 msgpack==1.1.0
     # via locust
-psutil==6.1.0
+psutil==6.1.1
     # via locust
 python-dateutil==2.9.0.post0
     # via faker
-pyzmq==26.2.0
+pyzmq==26.2.1
     # via locust
 requests==2.32.3
     # via locust
@@ -63,7 +63,7 @@ six==1.17.0
     # via python-dateutil
 typing-extensions==4.12.2
     # via faker
-urllib3==2.2.3
+urllib3==2.3.0
     # via
     #   geventhttpclient
     #   requests
