@@ -4,7 +4,7 @@ ARG TARGETARCH
 WORKDIR /src
 
 # restore dependencies
-COPY go.mod go.sum ./
+COPY src/frontend/go.mod go.sum ./
 RUN go mod download
 COPY . .
 

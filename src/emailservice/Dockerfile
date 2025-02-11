@@ -7,7 +7,7 @@ RUN apk update \
     && rm -rf /var/cache/apk/*
 
 # get packages
-COPY requirements.txt .
+COPY src/emailservice/requirements.txt .
 RUN pip install -r requirements.txt
 
 FROM base
