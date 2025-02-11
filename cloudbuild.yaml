@@ -27,7 +27,7 @@ steps:
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'push image'
+  id: 'adservice'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v2']
 
 # Build it and push it on cartservice registry  
@@ -51,7 +51,7 @@ steps:
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'push image'
+  id: 'cartservice'
   args: ['push', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v2']
 
 # Step 2: Check if the image already exists in Artifact Registry
