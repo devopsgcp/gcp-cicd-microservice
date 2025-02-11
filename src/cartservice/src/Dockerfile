@@ -7,7 +7,7 @@ COPY src/cartservice/src/cartservice.csproj .
 RUN dotnet restore cartservice.csproj
 
 # Copy the rest of the source code
-COPY cartservice/src/ ./src/
+COPY src/cartservice/src/ ./src/
 
 # Build the service with the specified publish settings
 WORKDIR /app/src
