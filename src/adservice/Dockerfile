@@ -3,7 +3,7 @@ FROM --platform=linux/amd64 eclipse-temurin:21.0.5_11-jdk@sha256:a20cfa6afdbf57f
 WORKDIR /app
 
 COPY ["src/adservice/build.gradle", "gradlew", "./"]
-COPY ./gradle gradle
+COPY src/adservice/gradle gradle
 RUN chmod +x gradlew
 RUN ./gradlew downloadRepos
 
