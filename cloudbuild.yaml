@@ -6,7 +6,6 @@ steps:
     - '--depth=1'
     - 'https://github.com/devopsgcp/gcp-cicd-microservice.git'
 
-# Step 1: Check if the image already exists in Artifact Registry for adservice and if not present the images
 # Build it and push it on artifact registry  
 - name: 'gcr.io/cloud-builders/gcloud'
   id: 'adservice'
@@ -47,7 +46,7 @@ steps:
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'Build image adservice'
+  id: 'Build image cartservice'
   args: ['build', '-f', 'src/cartservice/src/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v2', '.']
 
 
