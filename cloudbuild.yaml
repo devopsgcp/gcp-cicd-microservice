@@ -22,7 +22,7 @@ steps:
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'Build image adservice'
+  id: 'adservice'
   args: ['build', '-f', 'src/adservice/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/adservice:v2', '.']
 
 
@@ -46,7 +46,7 @@ steps:
 
 
 - name: 'gcr.io/cloud-builders/docker'
-  id: 'Build image cartservice'
+  id: 'cartservice'
   args: ['build', '-f', 'src/cartservice/src/Dockerfile', '-t', 'us-central1-docker.pkg.dev/cicd-2024/ecommerce/cartservice:v2', '.']
 
 
